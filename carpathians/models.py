@@ -28,7 +28,7 @@ class Route(models.Model):
     end_point = models.CharField(max_length=255)
     distance_km = models.FloatField()
     duration_hours = models.FloatField()
-    difficulty = models.CharField(max_length=100)
+    difficulty = models.ForeignKey(SkillLevel, on_delete=models.SET_NULL, null=True, related_name="routes")
 
     class Meta:
         ordering = ("start_point",)
