@@ -4,9 +4,10 @@ from django.contrib.auth.models import AbstractUser
 
 class SkillLevel(models.Model):
     name = models.CharField(max_length=100)
+    order = models.IntegerField(unique=True, default=0)
 
     class Meta:
-        ordering = ("name",)
+        ordering = ("order",)
 
     def __str__(self):
         return self.name
