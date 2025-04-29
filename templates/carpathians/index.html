@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="display-4">Welcome to Carpathians Travel</h1>
+    <p class="lead">Discover your next adventure!</p>
+</div>
+<div class="text-center my-4">
+    <img src="{% static 'images/backgroung.jpg' %}" alt="Carpathians View"
+         class="img-fluid w-100" style="max-height: 500px; object-fit: cover;">
+</div>
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-4">
+        <h1 class="display-4">{{ num_participants }}</h1>
+        <p class="lead">Participant{{ num_participants|pluralize }}</p>
+        <p>Registered travel participant{{ num_participants|pluralize }}</p>
+      </div>
+      <div class="col-md-4">
+        <h1 class="display-4">{{ num_routes }}</h1>
+        <p class="lead">Routes</p>
+        <p>Hiking routes of the Carpathians</p>
+      </div>
+      <div class="col-md-4">
+        <h1 class="display-4">{{ num_trips }}</h1>
+        <p class="lead">Trip{{ num_trips|pluralize }}</p>
+        <p>Created trip{{ num_trips|pluralize }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
