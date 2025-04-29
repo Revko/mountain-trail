@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Participants</h2>
+{% if participant_list %}
+    <table class="table">
+      <tr>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Skill level</th>
+        <th>Username</th>
+      </tr>
+    {% for participant in participant_list %}
+      <tr>
+        <td>{{ participant.first_name }}</td>
+        <td>{{ participant.last_name }}</td>
+        <td>{{ participant.skill_level }}</td>
+        <td>
+          <a href="{{ participant.get_absolute_url }}">{{ participant.username }}</a>
+          {% if participant.is_superuser %} <span class="text-muted">(Guide)</span>{% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+    </table>
+    {% else %}
+      <p>No participants found.</p>
+    {% endif %}
+{% endblock %}
