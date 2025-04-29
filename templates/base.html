@@ -2,9 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>Carpathians Travel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/material-kit/2.0.7/css/material-kit.min.css" rel="stylesheet">
+  {% block extra_head %}{% endblock %}
 </head>
 <body>
-$END$
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            {% block sidebar %}
+                {% include 'includes/sidebar.html' %}
+            {% endblock %}
+        </div>
+        <div class="col-sm-10 ">
+            {% block content %}{% endblock %}
+            {% block pagination %}
+                {% include 'includes/pagination.html' %}
+            {% endblock %}
+        </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/material-kit/2.0.7/js/material-kit.min.js"></script>
 </body>
 </html>
