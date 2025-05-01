@@ -9,10 +9,10 @@
   <a href="{{ trip_detail.route.get_absolute_url }}">{{ trip_detail.route }}</a>
 </p>
 
-<p><strong>Participants:</strong>
+<p><strong>Participants:</strong><br>
   {% if trip_detail.participants.all %}
     {% for participant in trip_detail.participants.all %}
-      <a href="{{ participant.get_absolute_url }}">{{ participant.first_name }} {{ participant.last_name }}</a>{% if not forloop.last %}, {% endif %}
+      <a href="{{ participant.get_absolute_url }}">{{ participant.first_name }} {{ participant.last_name }}</a><br>
     {% endfor %}
   {% else %}
     <span>No participants!</span>

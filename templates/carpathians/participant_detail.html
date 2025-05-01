@@ -10,9 +10,10 @@
 <p><strong>Skill Level:</strong> {{ participant.skill_level }}</p>
 <p><strong>Active trips:</strong>
   {% if participant.trips.all %}
+    <br>
     <span>
       {% for trip in participant.trips.all %}
-        <a href="{{ trip.get_absolute_url }}">{{ trip }}{% if not forloop.last %}, {% endif %}</a>
+        <a href="{{ trip.get_absolute_url }}">{{ trip }}</a><br>
       {% endfor %}
     </span>
   {% else %}
