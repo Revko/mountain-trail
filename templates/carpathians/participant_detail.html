@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Username: {{ participant.username }}</h1>
+<p><strong>First name:</strong> {{ participant.first_name }}</p>
+<p><strong>Last name:</strong> {{ participant.last_name }}</p>
+<p><strong>Skill Level:</strong> {{ participant.skill_level }}</p>
+<p><strong>Active trips:</strong>
+  {% if participant.trips.all %}
+    <span>
+      {% for trip in participant.trips.all %}
+        {{ trip.route }}{% if not forloop.last %}, {% endif %}
+      {% endfor %}
+    </span>
+  {% else %}
+    <span>No active trips!</span>
+  {% endif %}
+</p>
+<a href="{% url 'carpathians:participant-list' %}" class="btn btn-primary mt-3">Back to Participants</a>
+
+{% endblock %}
