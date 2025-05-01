@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ route_detail }}</h2>
+<p><strong>Start point:</strong> {{ route_detail.start_point }}</p>
+<p><strong>End point:</strong> {{ route_detail.end_point }}</p>
+<p><strong>Distance:</strong> {{ route_detail.distance_km }} km</p>
+<p><strong>Duration:</strong> {{ route_detail.duration_hours }} hours</p>
+<p><strong>Difficulty:</strong> {{ route_detail.difficulty }}</p>
+<a href="{% url 'carpathians:route-list' %}" class="btn btn-primary mt-3">Back to Routes</a>
+{% endblock %}

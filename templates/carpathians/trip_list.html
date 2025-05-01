@@ -5,8 +5,8 @@
 {% if trip_list %}
     <ul>
       {% for trip in trip_list %}
-        <li> {{ trip.date }} >>>
-          <a href="{% url 'carpathians:trip-detail' pk=trip.id %}">Detail</a>
+        <li>
+          <a href="{{ trip.get_absolute_url }}">{{ trip }}</a>
         </li>
       {% endfor %}
     </ul>

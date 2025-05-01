@@ -1,16 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Trips</h2>
-{% if trip_list %}
-    <ul>
-      {% for trip in trip_list %}
-        <li> {{ trip.date }}
-          <a href="{% url 'carpathians:trip-detail' pk=trip.id %}">Detail</a>
-        </li>
-      {% endfor %}
-    </ul>
+<h2>Trip on {{ trip_detail.date }}</h2>
+
+<p><strong>Date:</strong> {{ trip_detail.date }}</p>
+
+<p><strong>Route:</strong>
+  <a href="{{ trip_detail.route.get_absolute_url }}">{{ trip_detail.route }}</a>
+</p>
+
+<p><strong>Participants:</strong>
+  {% if trip_detail.participants.all %}
+    {% for participant in trip_detail.participants.all %}
+      <a href="{{ participant.get_absolute_url }}">{{ participant.first_name }} {{ participant.last_name }}</a>{% if not forloop.last %}, {% endif %}
+    {% endfor %}
   {% else %}
-    <p>There are no activ trips!</p>
+    <span>No participants!</span>
   {% endif %}
+</p>
+
+<a href="{% url 'carpathians:trip-list' %}" class="btn btn-primary mt-3">Back to Trips</a>
 {% endblock %}

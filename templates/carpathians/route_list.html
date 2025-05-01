@@ -3,24 +3,13 @@
 {% block content %}
 <h2>Routes</h2>
 {% if route_list %}
-    <table class="table">
-      <tr>
-        <th>Start point</th>
-        <th>End point</th>
-        <th>Distance(km)</th>
-        <th>Duration(h)</th>
-        <th>Difficulty</th>
-      </tr>
-    {% for route in route_list %}
-      <tr>
-        <td>{{ route.start_point }}</td>
-        <td>{{ route.end_point }}</td>
-        <td>{{ route.distance_km }}</td>
-        <td>{{ route.duration_hours }}</td>
-        <td>{{ route.difficulty }}</td>
-      </tr>
+    <ul>
+    {% for route in route_list  %}
+      <li>
+        <a href="{{ route.get_absolute_url }}">{{ route.start_point }} {{ route }}</a>
+      </li>
     {% endfor %}
-    </table>
+  </ul>
     {% else %}
       <p>No routes found.</p>
     {% endif %}

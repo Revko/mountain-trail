@@ -37,13 +37,20 @@ class RouteListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
 
 
-class TripListView(generic.ListView):
+class RouteDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Route
+    queryset = Route.objects.all().prefetch_related("trips__route")
+    template_name = "carpathians/route_detail.html"
+    context_object_name = "route_detail"
+
+
+class TripListView(LoginRequiredMixin, generic.ListView):
     model = Trip
     paginate_by = 5
     queryset = Trip.objects.all().select_related("route")
 
 
-class TripDetailView(generic.DetailView):
+class TripDetailView(LoginRequiredMixin, generic.DetailView):
     model = Trip
-    template_name = "trip_detail.html"
-    context_object_name = "trip"
+    template_name = "carpathians/trip_detail.html"
+    context_object_name = "trip_detail"
