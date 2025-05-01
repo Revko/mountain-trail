@@ -53,7 +53,7 @@ class Trip(models.Model):
         ordering = ("date",)
 
     def __str__(self):
-        return f"Trip on {self.date} - {self.route}"
+        return f"Trip on {self.date}, {self.route}"
 
     def get_absolute_url(self):
         return reverse("carpathians:trip-detail", kwargs={"pk": self.pk})
