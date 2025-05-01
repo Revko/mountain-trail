@@ -15,12 +15,11 @@
       <a href="{% url 'login' %}?next={{ request.path }}">Login</a>
     </li>
   {% endif %}
-
   <li class="list-group-item mt-2">
     <a href="{% url 'carpathians:index' %}">Home</a>
   </li>
   <li class="list-group-item">
-    <a href="{% url 'carpathians:participans-list' %}">Participants</a>
+    <a href="{% url 'carpathians:participant-list' %}">Participants</a>
   </li>
   <li class="list-group-item">
     <a href="{% url 'carpathians:route-list' %}">Routes</a>
