@@ -5,7 +5,6 @@ from django.views import generic
 from .models import SkillLevel, Participant, Route, Trip
 
 
-@login_required
 def index(request):
     num_participants = Participant.objects.count()
     num_routes = Route.objects.count()
