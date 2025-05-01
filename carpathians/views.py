@@ -1,3 +1,54 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
+from django.views import generic
+from .models import SkillLevel, Participant, Route, Trip
 
-# Create your views here.
+
+@login_required
+def index(request):
+    num_participants = Participant.objects.count()
+    num_routes = Route.objects.count()
+    num_trips = Trip.objects.count()
+
+    context = {
+        "num_participants": num_participants,
+        "num_routes": num_routes,
+        "num_trips": num_trips,
+    }
+
+    return render(request, "carpathians/index.html", context=context)
+
+
+class ParticipantListView(LoginRequiredMixin, generic.ListView):
+    model = Participant
+    paginate_by = 5
+
+
+class ParticipantDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Participant
+    queryset = Participant.objects.all().prefetch_related("trips__route")
+
+
+class RouteListView(generic.ListView):
+    model = Route
+    template_name = "route_list.html"
+    context_object_name = "routes"
+
+
+class RouteDetailView(generic.DetailView):
+    model = Route
+    template_name = "route_detail.html"
+    context_object_name = "route"
+
+
+class TripListView(generic.ListView):
+    model = Trip
+    template_name = "trip_list.html"
+    context_object_name = "trips"
+
+
+class TripDetailView(generic.DetailView):
+    model = Trip
+    template_name = "trip_detail.html"
+    context_object_name = "trip"
