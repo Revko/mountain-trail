@@ -12,7 +12,7 @@
   {% if participant.trips.all %}
     <span>
       {% for trip in participant.trips.all %}
-        <a href="{{ route.get_absolute_url }}">{{ trip.route }}{% if not forloop.last %}, {% endif %}</a>
+        <a href="{{ trip.get_absolute_url }}">{{ trip }}{% if not forloop.last %}, {% endif %}</a>
       {% endfor %}
     </span>
   {% else %}
