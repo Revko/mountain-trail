@@ -16,7 +16,7 @@
         <td>{{ participant.last_name }}</td>
         <td>{{ participant.skill_level }}</td>
         <td>
-          <a href="{{ participant.get_absolute_url }}">{{ participant.username }}</a>
+          <a href="{% url 'carpathians:participant-detail' participant.pk %}">{{ participant.username }}</a>
           {% if participant.is_superuser %} <span class="text-muted">(Guide)</span>{% endif %}
         </td>
       </tr>
