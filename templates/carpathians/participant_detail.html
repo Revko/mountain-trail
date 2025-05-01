@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>{{ participant.first_name }} {{ participant.last_name }}</h2>
+<h2>{{ participant.first_name }} {{ participant.last_name }}
+  {% if participant.is_superuser %} <span class="text-muted">(Guide)</span>{% endif %}
+</h2>
 <p><strong>Username:</strong> {{ participant.username }}</p>
 <p><strong>First name:</strong> {{ participant.first_name }}</p>
 <p><strong>Last name:</strong> {{ participant.last_name }}</p>

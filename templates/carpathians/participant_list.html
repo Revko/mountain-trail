@@ -6,7 +6,10 @@
   <ul>
     {% for participant in participant_list  %}
       <li>
-        <a href="{{ participant.get_absolute_url }}">{{ participant.first_name }} {{ participant.last_name }}</a>
+        <a href="{{ participant.get_absolute_url }}">
+          {{ participant.first_name }} {{ participant.last_name }}
+          {% if participant.is_superuser %} <span class="text-muted">(Guide)</span>{% endif %}
+        </a>
       </li>
     {% endfor %}
   </ul>
