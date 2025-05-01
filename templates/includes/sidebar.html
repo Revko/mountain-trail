@@ -2,7 +2,7 @@
 
   {% if user.is_authenticated %}
     <li class="list-group-item">
-      <strong>User:</strong><a href="">{{ user.username }}</a>
+      <strong>User:</strong><a href="{{ user.get_absolute_url }}">{{ user.first_name }} {{ user.last_name }}</a>
     </li>
     <li class="list-group-item">
       <form method="post" action="{% url 'logout' %}" style="display: inline;">
