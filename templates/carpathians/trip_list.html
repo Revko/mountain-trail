@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Trips</h2>
+{% if trip_list %}
+    <ul>
+      {% for trip in trip_list %}
+        <li> {{ trip.date }} >>>
+          <a href="{% url 'carpathians:trip-detail' pk=trip.id %}">Detail</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no activ trips!</p>
+  {% endif %}
+{% endblock %}

@@ -5,6 +5,7 @@ from .views import (
     TripListView,
     ParticipantListView,
     ParticipantDetailView,
+    TripDetailView,
 )
 
 app_name = "carpathians"
@@ -15,4 +16,5 @@ urlpatterns = [
     path("participant/<int:pk>/", ParticipantDetailView.as_view(), name="participant-detail"),
     path("routes/", RouteListView.as_view(), name="route-list"),
     path("trips/", TripListView.as_view(), name="trip-list"),
+    path("trips/<int:pk>/", TripDetailView.as_view(), name="trip-detail"),
 ]

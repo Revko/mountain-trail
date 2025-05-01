@@ -39,8 +39,8 @@ class RouteListView(LoginRequiredMixin, generic.ListView):
 
 class TripListView(generic.ListView):
     model = Trip
-    template_name = "trip_list.html"
-    context_object_name = "trips"
+    paginate_by = 5
+    queryset = Trip.objects.all().select_related("route")
 
 
 class TripDetailView(generic.DetailView):
