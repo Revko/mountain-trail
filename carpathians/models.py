@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.urls import reverse
 
 
 class SkillLevel(models.Model):
@@ -22,6 +23,9 @@ class Participant(AbstractUser):
     def __str__(self):
         return f"{self.last_name} {self.first_name} ({self.username})"
 
+    def get_absolute_url(self):
+        return reverse("carpathians:participant-detail", kwargs={"pk": self.pk})
+
 
 class Route(models.Model):
     start_point = models.CharField(max_length=255)
@@ -36,6 +40,9 @@ class Route(models.Model):
     def __str__(self):
         return f"{self.start_point} → {self.end_point}"
 
+    def get_absolute_url(self):
+        return reverse("carpathians:route-detail", kwargs={"pk": self.pk})
+
 
 class Trip(models.Model):
     route = models.ForeignKey(Route, on_delete=models.CASCADE, related_name="trips")
@@ -47,3 +54,6 @@ class Trip(models.Model):
 
     def __str__(self):
         return f"Trip on {self.date} - {self.route}"
+
+    def get_absolute_url(self):
+        return reverse("carpathians:trip-detail", kwargs={"pk": self.pk})
