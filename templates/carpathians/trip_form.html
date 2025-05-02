@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>{% if object %}Edit Trip{% else %}Add Trip{% endif %}</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">
+      {% if object %}Save Changes{% else %}Create Trip{% endif %}
+    </button>
+    <a href="{% url 'carpathians:trip-list' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+{% endblock %}
