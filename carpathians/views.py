@@ -4,7 +4,6 @@ from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
-
 from .forms import (
     RouteForm,
     ParticipantForm,
@@ -34,10 +33,7 @@ class ParticipantListView(LoginRequiredMixin, generic.ListView):
     model = Participant
     paginate_by = 5
 
-
-    def get_context_data(
-        self, *, object_list = ..., **kwargs
-    ):
+    def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ParticipantListView, self).get_context_data(**kwargs)
         last_name = self.request.GET.get("last_name")
         context["search_form"] = ParticipantSearchForm(
@@ -85,10 +81,7 @@ class RouteListView(LoginRequiredMixin, generic.ListView):
     context_object_name = "route_list"
     paginate_by = 5
 
-
-    def get_context_data(
-        self, *, object_list = ..., **kwargs
-    ):
+    def get_context_data(self, *, object_list=None, **kwargs):
         context = super(RouteListView, self).get_context_data(**kwargs)
         start_point = self.request.GET.get("start_point", "")
         context["search_form"] = RouteSearchForm(
@@ -120,11 +113,13 @@ class RouteCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = "carpathians/route_form.html"
     success_url = reverse_lazy("carpathians:route-list")
 
+
 class RouteUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Route
     form_class = RouteForm
     template_name = "carpathians/route_form.html"
     success_url = reverse_lazy("carpathians:route-list")
+
 
 class RouteDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Route
@@ -183,7 +178,6 @@ class TripDeleteView(LoginRequiredMixin, generic.DeleteView):
 def toggle_participation(request, pk):
     trip = get_object_or_404(Trip, pk=pk)
     user = request.user
-
     if user in trip.participants.all():
         trip.participants.remove(user)
     else:

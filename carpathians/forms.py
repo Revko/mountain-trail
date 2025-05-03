@@ -7,7 +7,13 @@ from .models import Participant, Route, Trip
 class ParticipantForm(UserCreationForm):
     class Meta:
         model = Participant
-        fields = ("username", "first_name", "last_name", "email", "skill_level")
+        fields = (
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "skill_level",
+        )
 
 
 class ParticipantSkillLevelUpdateForm(forms.ModelForm):
@@ -77,5 +83,5 @@ class TripSearchForm(forms.Form):
     date = forms.DateField(
         required=False,
         label="",
-        widget=forms.DateInput(attrs={"type": "date",})
+        widget=forms.DateInput(attrs={"type": "date", })
     )

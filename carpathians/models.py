@@ -15,7 +15,12 @@ class SkillLevel(models.Model):
 
 
 class Participant(AbstractUser):
-    skill_level = models.ForeignKey(SkillLevel, on_delete=models.SET_NULL, null=True, related_name="participants")
+    skill_level = models.ForeignKey(
+        SkillLevel,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="participants"
+    )
 
     class Meta:
         ordering = ("last_name",)
@@ -24,7 +29,10 @@ class Participant(AbstractUser):
         return f"{self.last_name} {self.first_name} ({self.username})"
 
     def get_absolute_url(self):
-        return reverse("carpathians:participant-detail", kwargs={"pk": self.pk})
+        return reverse(
+            "carpathians:participant-detail",
+            kwargs={"pk": self.pk},
+        )
 
 
 class Route(models.Model):
@@ -32,7 +40,12 @@ class Route(models.Model):
     end_point = models.CharField(max_length=255)
     distance_km = models.FloatField()
     duration_hours = models.FloatField()
-    difficulty = models.ForeignKey(SkillLevel, on_delete=models.SET_NULL, null=True, related_name="routes")
+    difficulty = models.ForeignKey(
+        SkillLevel,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="routes"
+    )
 
     class Meta:
         ordering = ("start_point",)
@@ -45,7 +58,11 @@ class Route(models.Model):
 
 
 class Trip(models.Model):
-    route = models.ForeignKey(Route, on_delete=models.CASCADE, related_name="trips")
+    route = models.ForeignKey(
+        Route,
+        on_delete=models.CASCADE,
+        related_name="trips"
+    )
     date = models.DateField()
     participants = models.ManyToManyField(Participant, related_name="trips")
 

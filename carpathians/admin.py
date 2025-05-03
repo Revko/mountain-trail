@@ -31,7 +31,13 @@ class SkillLevelAdmin(admin.ModelAdmin):
 
 @admin.register(Route)
 class RouteAdmin(admin.ModelAdmin):
-    list_display = ("start_point", "end_point", "distance_km", "duration_hours", "difficulty")
+    list_display = (
+        "start_point",
+        "end_point",
+        "distance_km",
+        "duration_hours",
+        "difficulty"
+    )
     search_fields = ("start_point", "end_point")
     list_filter = ("difficulty",)
 
