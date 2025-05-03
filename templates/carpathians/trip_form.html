@@ -1,11 +1,25 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 
 {% block content %}
-  <h2>{% if object %}Edit Trip{% else %}Add Trip{% endif %}</h2>
+  <h2>{% if object %}Edit Trip{% else %}Create Trip{% endif %}</h2>
 
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+
+    {{ form.date|as_crispy_field }}
+
+    <div class="form-group">
+      {{ form.route|as_crispy_field }}
+    </div>
+
+    <div class="form-group">
+      <label for="id_participants"><strong>Participants:</strong></label>
+      <div class="checkbox-group">
+        {{ form.participants }}
+      </div>
+    </div>
+
     <button type="submit" class="btn btn-primary">
       {% if object %}Save Changes{% else %}Create Trip{% endif %}
     </button>

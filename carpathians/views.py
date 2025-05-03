@@ -10,7 +10,7 @@ from .forms import (
     ParticipantSkillLevelUpdateForm,
     ParticipantSearchForm,
     RouteSearchForm,
-    TripSearchForm,
+    TripSearchForm, TripForm,
 )
 from .models import Participant, Route, Trip
 
@@ -160,14 +160,14 @@ class TripDetailView(LoginRequiredMixin, generic.DetailView):
 
 class TripCreateView(LoginRequiredMixin, generic.CreateView):
     model = Trip
-    fields = "__all__"
+    form_class = TripForm
     template_name = "carpathians/trip_form.html"
     success_url = reverse_lazy("carpathians:trip-list")
 
 
 class TripUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Trip
-    fields = "__all__"
+    form_class = TripForm
     template_name = "carpathians/trip_form.html"
     success_url = reverse_lazy("carpathians:trip-list")
 

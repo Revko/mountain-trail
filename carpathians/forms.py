@@ -45,6 +45,29 @@ class RouteSearchForm(forms.Form):
 
 
 class TripForm(forms.ModelForm):
+    route = forms.ModelChoiceField(
+        queryset=Route.objects.all(),
+        widget=forms.Select(attrs={"class": "form-control"}),
+        required=True,
+        label="Route"
+    )
+
+    date = forms.DateField(
+        widget=forms.DateInput(
+            attrs={
+                "type": "date",
+                "class": "form-control"
+            }
+        )
+    )
+
+    participants = forms.ModelMultipleChoiceField(
+        queryset=Participant.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False,
+        label="Participants"
+    )
+
     class Meta:
         model = Trip
         fields = "__all__"
@@ -53,6 +76,6 @@ class TripForm(forms.ModelForm):
 class TripSearchForm(forms.Form):
     date = forms.DateField(
         required=False,
-        label="Date",
-        widget=forms.DateInput(attrs={"type": "date", "placeholder": "YYYY-MM-DD"})
+        label="",
+        widget=forms.DateInput(attrs={"type": "date",})
     )
