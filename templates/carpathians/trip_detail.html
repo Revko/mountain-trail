@@ -28,6 +28,15 @@
     <span>No participants!</span>
   {% endif %}
 </p>
-
+{% if user.is_authenticated %}
+  <form method="post" action="{% url 'carpathians:trip-toggle-join' trip_detail.pk %}">
+    {% csrf_token %}
+    {% if user in trip_detail.participants.all %}
+      <button type="submit" class="btn btn-danger">Leave Trip</button>
+    {% else %}
+      <button type="submit" class="btn btn-success">Join Trip</button>
+    {% endif %}
+  </form>
+{% endif %}
 <a href="{% url 'carpathians:trip-list' %}" class="btn btn-primary mt-3">Back to Trips</a>
 {% endblock %}

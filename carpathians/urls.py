@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import (
     index,
+    toggle_participation,
     RouteListView,
     TripListView,
     ParticipantListView,
@@ -37,4 +38,5 @@ urlpatterns = [
     path("trips/create/", TripCreateView.as_view(), name="trip-create"),
     path("trips/<int:pk>/update/", TripUpdateView.as_view(), name="trip-update"),
     path("trips/<int:pk>/delete/", TripDeleteView.as_view(), name="trip-delete"),
+    path("trips/<int:pk>/toggle-join/", toggle_participation, name="trip-toggle-join"),
 ]

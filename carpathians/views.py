@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
@@ -176,3 +177,16 @@ class TripDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Trip
     template_name = "carpathians/trip_confirm_delete.html"
     success_url = reverse_lazy("carpathians:trip-list")
+
+
+@login_required
+def toggle_participation(request, pk):
+    trip = get_object_or_404(Trip, pk=pk)
+    user = request.user
+
+    if user in trip.participants.all():
+        trip.participants.remove(user)
+    else:
+        trip.participants.add(user)
+
+    return redirect("carpathians:trip-detail", pk=trip.pk)
