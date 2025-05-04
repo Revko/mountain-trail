@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="mb-0">{{ route_detail }}</h2>
+  <div>
+    <a href="{% url 'carpathians:route-update' pk=route_detail.id %}" class="btn btn-outline-success">
+      Edit
+    </a>
+    <a href="{% url 'carpathians:route-delete' pk=route_detail.id %}" class="btn btn-outline-danger ms-2">
+      Delete
+    </a>
+  </div>
+</div>
+<p><strong>Start point:</strong> {{ route_detail.start_point }}</p>
+<p><strong>End point:</strong> {{ route_detail.end_point }}</p>
+<p><strong>Distance:</strong> {{ route_detail.distance_km }} km</p>
+<p><strong>Duration:</strong> {{ route_detail.duration_hours }} hours</p>
+<p><strong>Difficulty:</strong> {{ route_detail.difficulty }}</p>
+<a href="{% url 'carpathians:route-list' %}" class="btn btn-primary mt-3">Back to Routes</a>
+{% endblock %}

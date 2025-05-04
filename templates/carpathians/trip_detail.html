@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="mb-0">Trip on {{ trip_detail.date }}</h2>
+  <div>
+    <a href="{% url 'carpathians:trip-update' pk=trip_detail.id %}" class="btn btn-outline-success">
+      Edit
+    </a>
+    <a href="{% url 'carpathians:trip-delete' pk=trip_detail.id %}" class="btn btn-outline-danger ms-2">
+      Delete
+    </a>
+  </div>
+</div>
+
+<p><strong>Date:</strong> {{ trip_detail.date }}</p>
+
+<p><strong>Route:</strong>
+  <a href="{{ trip_detail.route.get_absolute_url }}">{{ trip_detail.route }}</a>
+</p>
+
+<p><strong>Participants:</strong><br>
+  {% if trip_detail.participants.all %}
+    {% for participant in trip_detail.participants.all %}
+      <a href="{{ participant.get_absolute_url }}">{{ participant.first_name }} {{ participant.last_name }}</a><br>
+    {% endfor %}
+  {% else %}
+    <span>No participants!</span>
+  {% endif %}
+</p>
+{% if user.is_authenticated %}
+  <form method="post" action="{% url 'carpathians:trip-toggle-join' trip_detail.pk %}">
+    {% csrf_token %}
+    {% if user in trip_detail.participants.all %}
+      <button type="submit" class="btn btn-danger">Leave Trip</button>
+    {% else %}
+      <button type="submit" class="btn btn-success">Join Trip</button>
+    {% endif %}
+  </form>
+{% endif %}
+<a href="{% url 'carpathians:trip-list' %}" class="btn btn-primary mt-3">Back to Trips</a>
+{% endblock %}

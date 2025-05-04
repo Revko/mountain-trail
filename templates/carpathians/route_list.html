@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="mb-0">Routes</h2>
+  <a href="{% url 'carpathians:route-create' %}" class="btn btn-outline-success">
+    Add new route
+  </a>
+</div>
+
+<form method="get" action="" class="form-inline">
+    {{ search_form|crispy }}
+    <input type="submit" value="🔍">
+</form>
+{% if route_list %}
+    <ul>
+    {% for route in route_list  %}
+      <li>
+        <a href="{{ route.get_absolute_url }}">{{ route }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+    {% else %}
+      <p>No routes found.</p>
+    {% endif %}
+{% endblock %}

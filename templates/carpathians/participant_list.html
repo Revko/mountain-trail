@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="mb-0">Participants</h2>
+  <a href="{% url 'carpathians:participant-create' %}" class="btn btn-outline-success">
+    Add new participant
+  </a>
+</div>
+  <form method="get" action="" class="form-inline">
+      {{ search_form|crispy }}
+      <input type="submit" value="🔍">
+  </form>
+{% if participant_list %}
+  <ul>
+    {% for participant in participant_list  %}
+      <li>
+        <a href="{{ participant.get_absolute_url }}">
+          {{ participant.first_name }} {{ participant.last_name }}
+          {% if participant.is_superuser %} <span class="text-muted">(Guide)</span>{% endif %}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+    {% else %}
+      <p>No participants found.</p>
+    {% endif %}
+{% endblock %}

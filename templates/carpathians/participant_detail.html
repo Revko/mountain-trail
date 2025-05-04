@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="mb-0">{{ participant.first_name }} {{ participant.last_name }}
+    {% if participant.is_superuser %} <span class="text-muted">(Guide)</span>{% endif %}
+  </h2>
+   <div>
+    <a href="{% url 'carpathians:participant-update' pk=participant.id %}" class="btn btn-outline-success">
+      Update
+    </a>
+    <a href="{% url 'carpathians:participant-delete' pk=participant.id %}" class="btn btn-outline-danger ms-2">
+      Delete
+    </a>
+  </div>
+</div>
+<p><strong>Username:</strong> {{ participant.username }}</p>
+<p><strong>First name:</strong> {{ participant.first_name }}</p>
+<p><strong>Last name:</strong> {{ participant.last_name }}</p>
+<p><strong>Skill Level:</strong> {{ participant.skill_level }}</p>
+<p><strong>Active trips:</strong>
+  {% if participant.trips.all %}
+    <br>
+    <span>
+      {% for trip in participant.trips.all %}
+        <a href="{{ trip.get_absolute_url }}">{{ trip }}</a><br>
+      {% endfor %}
+    </span>
+  {% else %}
+    <span>No active trips!</span>
+  {% endif %}
+</p>
+<a href="{% url 'carpathians:participant-list' %}" class="btn btn-primary mt-3">Back to Participants</a>
+
+{% endblock %}

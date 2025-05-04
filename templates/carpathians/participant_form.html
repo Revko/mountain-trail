@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <h2>{% if object %}Update Skill Level{% else %}Add Participant{% endif %}</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary">
+      {% if object %}Save Changes{% else %}Create Participant{% endif %}
+    </button>
+    <a href="{% url 'carpathians:participant-list' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+{% endblock %}
